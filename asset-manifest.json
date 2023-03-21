@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/hashmart/static/css/main.9cacdabc.css",
+    "main.js": "/hashmart/static/js/main.22124bd9.js",
+    "index.html": "/hashmart/index.html",
+    "main.9cacdabc.css.map": "/hashmart/static/css/main.9cacdabc.css.map",
+    "main.22124bd9.js.map": "/hashmart/static/js/main.22124bd9.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.9cacdabc.css",
+    "static/js/main.22124bd9.js"
+  ]
+}
