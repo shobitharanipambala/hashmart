@@ -5,50 +5,28 @@
 // const defaultCart = JSON.parse(localStorage.getItem('cart')) || []
 
 // const CartProvider = ({children}) => {
-// const [Items, setItems] = useState(defaultCart);
+// const [items, setItems] = useState(defaultCart);
 
 // useEffect(() =>{
-//   localStorage.setItem('cart', JSON.stringify(Items));
-//   },[Items]
+//   localStorage.setItem('cart', JSON.stringify(items));
+//   },[items]
 
 // )
 // const addToCart = (data , findCartItem ) => {
 //   if(!findCartItem ){
-//            return setItems((Items)=>[data , Items])
+//     return setItems((items)=>[data ,...items])
 //   }      
-// const filtered = Items.filtered((Items)=> Items.id !== findCartItem.id)
+// const filtered = items.filtered((Item)=> Items.id !== findCartItem.id)
 // setItems (filtered)
 // }
 // const removeFromCart = (item_id) =>{
-//   const filtered = Items.filtered((Items)=>Items.id !== item_id)
+//   const filtered = items.filter((item)=>items.id !== item_id)
 //   setItems(filtered)
 
 // }
 // const values = {
-//   Items, setItems, addToCart,  removeFromCart 
+//   items, setItems, addToCart,  removeFromCart }
 
-// }
-// // useEffect (
-// //   (const addToCart (data , findCartItem ) => {
-// //     if(findCartItem == false){
-// //        return data;
-// //     }if(findCartItem == true) {
-// //       const filtered = filteredItems.filter;
-// //     }
-// //     const removeFromCart (item_id){
-// //       return filtered.indexOf(item_id);
-// //     }
-// //     return(
-// //       setitems(filtered)
-
-
-
-// //     )
-  
-
-// //   }
-
-// // )
 //   /**
 //    * 1. Create a state variable called items and a function to update it called setItems that is initialized to the defaultCart
 //    * 2. Create a useEffect hook that will run when the items state variable changes
@@ -70,9 +48,6 @@
 // const useCart = () => useContext(CartContext)
 
 // export { CartProvider, useCart }
-
-
-
 import { useState, createContext, useContext, useEffect } from 'react'
 
 const CartContext = createContext()
@@ -80,33 +55,41 @@ const CartContext = createContext()
 const defaultCart = JSON.parse(localStorage.getItem('cart')) || []
 
 const CartProvider = ({children}) => {
-  const [Items, setItems] = useState(defaultCart)
+  const [items, setItems] = useState(defaultCart);
 
-  useEffect(() => {
-    localStorage.setItem('cart', JSON.stringify(Items))
-  }, [Items])
+  useEffect(() =>{
+    localStorage.setItem('cart', JSON.stringify(items));
+  }, [items]);
 
   const addToCart = (data, findCartItem) => {
-    if(!findCartItem) {
-      return setItems((Items) => [data, ...Items] )
+    if (!findCartItem) {
+      return setItems((items) => [data, ...items])
+    } else {
+      const filtered = items.filter((item) => item.id !== findCartItem.id)
+      setItems(filtered)  
     }
-
-    const filtered = Items.filter((item) => item.id !== findCartItem.id)
-    setItems(filtered)
   }
 
   const removeFromCart = (item_id) => {
-    const filtered = Items.filter((item) => item.id !== item_id)
+    const filtered = items.filter((item) => item.id !== item_id)
     setItems(filtered)
   }
 
   const values = {
-    Items, setItems, addToCart, removeFromCart,
+    items,
+    setItems,
+    addToCart,
+    removeFromCart
   }
 
-  return <CartContext.Provider value={values}>{children}</CartContext.Provider>
+  return (
+    <CartContext.Provider value={values}>
+      {children}
+    </CartContext.Provider>
+  )
 }
 
 const useCart = () => useContext(CartContext)
 
 export { CartProvider, useCart }
+

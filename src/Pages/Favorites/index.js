@@ -38,9 +38,33 @@ const Favorites = () => {
           </div>
         </div>
       )}
-      /**
-        * Your code goes here
-       */
+
+
+            {/* * Your code goes here */}
+        <div className={styles.cardGroup}>
+          {favoriteItems.length > 0 ? (
+            favoriteItems.map((item) => {
+              const findFavoriteItem = favoriteItems.find((fav_item) => fav_item.id === item.id)
+              const findCartItem = items.find((cart_item) => cart_item.id === item.id)
+              return (
+                <Card
+                  item={item}
+                  findFavoriteItem={findFavoriteItem}
+                  favoriteItems={favoriteItems}
+                  addToFavorite={addToFavorite}
+                  addToCart={addToCart}
+                  findCartItem={findCartItem}
+                />
+              )
+            })
+          ) : (
+            <p>No favorite items found.</p>
+          )}
+        </div>
+      
+      
+        
+       
     </div>
   )
 }

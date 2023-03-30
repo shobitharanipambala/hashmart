@@ -43,6 +43,7 @@ const FavoriteProvider = ({children}) => {
   useEffect(() => {
     localStorage.setItem('favorite', JSON.stringify(favoriteItems))
   }, [favoriteItems])
+    
 
   const addToFavorite = (data, findFavoriteItem) => {
     if(!findFavoriteItem) {
